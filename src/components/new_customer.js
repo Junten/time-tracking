@@ -3,19 +3,13 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import axios from 'axios';
 
-import { createCustomer } from '../actions/index';
-
 class NewCustomer extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
 
     onDataSubmit(props) {
-        // this.props.createCustomer(props)
-        //     .then(() => {
-        //     this.context.router.push('/');
-        // });
-
+    
         const res = axios({
             method: 'post',
             url: "/api/customer/",
@@ -87,3 +81,6 @@ export default reduxForm({
   form: 'NewCustomer',  // a unique identifier for this form
   validate               // <--- validation function given to redux-form
 })(NewCustomer)
+
+
+

@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-const CustomerDataSchema = new Schema({
+const CustomerData = new Schema({
     CustomerName: {
         required: true,
         type: String,
@@ -36,11 +36,9 @@ const CustomerDataSchema = new Schema({
     },
 
     BillingContact: {
-        // id: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'customerContact'
-        // },
-        name: String
+        type: Schema.Types.ObjectId,
+        ref: 'CustomerContact'
+      
     },
 
     PoNumber: {
@@ -50,13 +48,13 @@ const CustomerDataSchema = new Schema({
 
     TimeTrackingDetail: Number,
     
-    InactiveData: Date,
+    InactiveData: Date
 });
 
-const CustomerContactSchema = new Schema({
+const CustomerContact = new Schema({
     CustomerID: {
         type: Schema.Types.ObjectId,
-        ref: 'CustomerDataSchema'
+        ref: 'CustomerData'
     },
 
     Email: {
@@ -110,10 +108,41 @@ const CustomerContactSchema = new Schema({
         trim: true
     },
 
-    InactiveData: Date,
+    InactiveData: Date
 });
 
 const CustomerProject = new Schema({
+    CustomerID: {
+        type: Schema.Types.ObjectId,
+        ref: 'CustomerDataSchema'
+    },
+
+    ProjectName: {
+        type: String,
+        trim: true
+    },
+
+    StartDate: {
+        type: Date
+    },
+
+    EndDate: {
+        type: Date
+    },
+
+    Description: {
+        type: String,
+        trim: true
+    },
+
+    Hours: {
+        type: Number,
+        trim: true
+    },
+
+    AmountAllocated: {
+        type: Number
+    }
 
 });
 
@@ -121,9 +150,9 @@ const CustomerProjectPhase = new Schema({
 
 });
 
-exports.CustomerDataSchema = CustomerDataSchema;
+exports.CustomerData = CustomerData;
 
-exports.CustomerContactSchema = CustomerContactSchema;
+exports.CustomerContact = CustomerContact;
 
 
 

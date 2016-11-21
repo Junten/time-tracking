@@ -3,18 +3,17 @@ import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router';
 import axios from 'axios';
 
-import { createCustomer } from '../actions/index';
-
-class NewCustomer extends Component {
+class NewCustomerContact extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
 
     onDataSubmit(props) {
-
+        props.customerId = this.props.params.id;
+        
         const res = axios({
             method: 'post',
-            url: "/api/customer/",
+            url: "/api/customer-contact/",
             data: props,
             responseType: 'json'
         })
@@ -29,14 +28,16 @@ class NewCustomer extends Component {
 
         return (
             <form onSubmit={handleSubmit(this.onDataSubmit.bind(this))}>
-                <h3> Create New Customer</h3>
-                <Field name="CustomerName" type="text" component={renderField} label="Customer name"/>
+                <h3> Edit Customer</h3>
                 <Field name="Email" type="email" component={renderField} label="Email"/>
-                <Field name="Address" type="text" component={renderField} label="Address"/>
+                <Field name="FirstName" type="text" component={renderField} label="FirstName"/>
+                <Field name="LastName" type="text" component={renderField} label="LastName"/>
+                <Field name="MiddleInitial" type="text" component={renderField} label="MiddleInitial"/>
+                <Field name="FullName" type="text" component={renderField} label="FullName"/>
+                <Field name="Address2" type="text" component={renderField} label="Address2"/>
                 <Field name="City" type="text" component={renderField} label="City"/>
                 <Field name="State" type="text" component={renderField} label="State"/>
                 <Field name="Zip" type="text" component={renderField} label="Zip Code"/>
-                <Field name="PoNumber" type="text" component={renderField} label="PO Box Number"/>
                 <div>
                     <button type="submit" disabled={submitting}>Submit</button>
                     <button type="button" disabled={pristine || submitting} onClick={reset}>Clear Values</button>
@@ -63,12 +64,6 @@ class renderField extends Component {
 
 const validate = (values) => {
     const errors = {};
-    if (!values.CustomerName) {
-        errors.CustomerName = 'Required';
-    } else if (values.CustomerName.length > 50) {
-        errors.CustomerName = 'Must be 50 characters or less!';
-    }
-
     if (!values.Email) {
         errors.Email = 'Required';
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.Email)) {
@@ -80,6 +75,8 @@ const validate = (values) => {
 
 
 export default reduxForm({
-  form: 'NewCustomer',  // a unique identifier for this form
+  form: 'NewCustomerContact',  // a unique identifier for this form
   validate               // <--- validation function given to redux-form
-})(NewCustomer)
+})(NewCustomerContact)
+
+

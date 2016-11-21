@@ -4,21 +4,6 @@ export const GET_CUSTOMER = 'GET_CUSTOMER';
 export const GET_CUSTOMER_ID = 'GET_CUSTOMER_ID';
 export const GET_CUSTOMER_CONTACT = 'GET_CUSTOMER_CONTACT';
 
-// export const createCustomer = (data) => {
-
-// 	const res = axios({
-//         method: 'post',
-//         url: "/api/customer/",
-//         data: data,
-//         responseType: 'json'
-//     });
-
-// 	return ({
-//         type: CREATE_CUSTOMER,
-// 	    payload: res
-//     });
-// }
-
 export const getCustomer = () => {
 
     const res = axios({
